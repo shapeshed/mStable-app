@@ -295,3 +295,23 @@ query RewardsDistributor @api(name: mstable) {
     fundManagers
   }
 }
+
+query MerkleDropClaims($account: Bytes!) @api(name: mstable) {
+  merkleDrops {
+    id
+    token {
+      ...TokenDetails
+    }
+    tranches(
+      orderDirection: asc
+      orderBy: trancheNumber
+      where: { expired: false }
+    ) {
+      trancheNumber
+      totalAmount
+      claims(where: { account: $account }) {
+        balance
+      }
+    }
+  }
+}

@@ -741,6 +741,218 @@ export enum Masset_OrderBy {
   SavingsContracts = 'savingsContracts'
 }
 
+export type MerkleDrop = {
+  id: Scalars['ID'];
+  token: Token;
+  claims: Array<MerkleDropClaim>;
+  tranches: Array<MerkleDropTranche>;
+  funders: Array<Scalars['Bytes']>;
+};
+
+
+export type MerkleDropClaimsArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<MerkleDropClaim_OrderBy>;
+  orderDirection?: Maybe<OrderDirection>;
+  where?: Maybe<MerkleDropClaim_Filter>;
+};
+
+
+export type MerkleDropTranchesArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<MerkleDropTranche_OrderBy>;
+  orderDirection?: Maybe<OrderDirection>;
+  where?: Maybe<MerkleDropTranche_Filter>;
+};
+
+export type MerkleDrop_Filter = {
+  id?: Maybe<Scalars['ID']>;
+  id_not?: Maybe<Scalars['ID']>;
+  id_gt?: Maybe<Scalars['ID']>;
+  id_lt?: Maybe<Scalars['ID']>;
+  id_gte?: Maybe<Scalars['ID']>;
+  id_lte?: Maybe<Scalars['ID']>;
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  token?: Maybe<Scalars['String']>;
+  token_not?: Maybe<Scalars['String']>;
+  token_gt?: Maybe<Scalars['String']>;
+  token_lt?: Maybe<Scalars['String']>;
+  token_gte?: Maybe<Scalars['String']>;
+  token_lte?: Maybe<Scalars['String']>;
+  token_in?: Maybe<Array<Scalars['String']>>;
+  token_not_in?: Maybe<Array<Scalars['String']>>;
+  token_contains?: Maybe<Scalars['String']>;
+  token_not_contains?: Maybe<Scalars['String']>;
+  token_starts_with?: Maybe<Scalars['String']>;
+  token_not_starts_with?: Maybe<Scalars['String']>;
+  token_ends_with?: Maybe<Scalars['String']>;
+  token_not_ends_with?: Maybe<Scalars['String']>;
+  funders?: Maybe<Array<Scalars['Bytes']>>;
+  funders_not?: Maybe<Array<Scalars['Bytes']>>;
+  funders_contains?: Maybe<Array<Scalars['Bytes']>>;
+  funders_not_contains?: Maybe<Array<Scalars['Bytes']>>;
+};
+
+export enum MerkleDrop_OrderBy {
+  Id = 'id',
+  Token = 'token',
+  Claims = 'claims',
+  Tranches = 'tranches',
+  Funders = 'funders'
+}
+
+export type MerkleDropClaim = {
+  id: Scalars['ID'];
+  account: Scalars['Bytes'];
+  merkleDrop: MerkleDrop;
+  tranche: MerkleDropTranche;
+  balance: Scalars['BigInt'];
+};
+
+export type MerkleDropClaim_Filter = {
+  id?: Maybe<Scalars['ID']>;
+  id_not?: Maybe<Scalars['ID']>;
+  id_gt?: Maybe<Scalars['ID']>;
+  id_lt?: Maybe<Scalars['ID']>;
+  id_gte?: Maybe<Scalars['ID']>;
+  id_lte?: Maybe<Scalars['ID']>;
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  account?: Maybe<Scalars['Bytes']>;
+  account_not?: Maybe<Scalars['Bytes']>;
+  account_in?: Maybe<Array<Scalars['Bytes']>>;
+  account_not_in?: Maybe<Array<Scalars['Bytes']>>;
+  account_contains?: Maybe<Scalars['Bytes']>;
+  account_not_contains?: Maybe<Scalars['Bytes']>;
+  merkleDrop?: Maybe<Scalars['String']>;
+  merkleDrop_not?: Maybe<Scalars['String']>;
+  merkleDrop_gt?: Maybe<Scalars['String']>;
+  merkleDrop_lt?: Maybe<Scalars['String']>;
+  merkleDrop_gte?: Maybe<Scalars['String']>;
+  merkleDrop_lte?: Maybe<Scalars['String']>;
+  merkleDrop_in?: Maybe<Array<Scalars['String']>>;
+  merkleDrop_not_in?: Maybe<Array<Scalars['String']>>;
+  merkleDrop_contains?: Maybe<Scalars['String']>;
+  merkleDrop_not_contains?: Maybe<Scalars['String']>;
+  merkleDrop_starts_with?: Maybe<Scalars['String']>;
+  merkleDrop_not_starts_with?: Maybe<Scalars['String']>;
+  merkleDrop_ends_with?: Maybe<Scalars['String']>;
+  merkleDrop_not_ends_with?: Maybe<Scalars['String']>;
+  tranche?: Maybe<Scalars['String']>;
+  tranche_not?: Maybe<Scalars['String']>;
+  tranche_gt?: Maybe<Scalars['String']>;
+  tranche_lt?: Maybe<Scalars['String']>;
+  tranche_gte?: Maybe<Scalars['String']>;
+  tranche_lte?: Maybe<Scalars['String']>;
+  tranche_in?: Maybe<Array<Scalars['String']>>;
+  tranche_not_in?: Maybe<Array<Scalars['String']>>;
+  tranche_contains?: Maybe<Scalars['String']>;
+  tranche_not_contains?: Maybe<Scalars['String']>;
+  tranche_starts_with?: Maybe<Scalars['String']>;
+  tranche_not_starts_with?: Maybe<Scalars['String']>;
+  tranche_ends_with?: Maybe<Scalars['String']>;
+  tranche_not_ends_with?: Maybe<Scalars['String']>;
+  balance?: Maybe<Scalars['BigInt']>;
+  balance_not?: Maybe<Scalars['BigInt']>;
+  balance_gt?: Maybe<Scalars['BigInt']>;
+  balance_lt?: Maybe<Scalars['BigInt']>;
+  balance_gte?: Maybe<Scalars['BigInt']>;
+  balance_lte?: Maybe<Scalars['BigInt']>;
+  balance_in?: Maybe<Array<Scalars['BigInt']>>;
+  balance_not_in?: Maybe<Array<Scalars['BigInt']>>;
+};
+
+export enum MerkleDropClaim_OrderBy {
+  Id = 'id',
+  Account = 'account',
+  MerkleDrop = 'merkleDrop',
+  Tranche = 'tranche',
+  Balance = 'balance'
+}
+
+export type MerkleDropTranche = {
+  id: Scalars['ID'];
+  merkleDrop: MerkleDrop;
+  expired: Scalars['Boolean'];
+  trancheNumber: Scalars['Int'];
+  merkleRoot: Scalars['Bytes'];
+  totalAmount: Scalars['BigInt'];
+  claims: Array<MerkleDropClaim>;
+};
+
+
+export type MerkleDropTrancheClaimsArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<MerkleDropClaim_OrderBy>;
+  orderDirection?: Maybe<OrderDirection>;
+  where?: Maybe<MerkleDropClaim_Filter>;
+};
+
+export type MerkleDropTranche_Filter = {
+  id?: Maybe<Scalars['ID']>;
+  id_not?: Maybe<Scalars['ID']>;
+  id_gt?: Maybe<Scalars['ID']>;
+  id_lt?: Maybe<Scalars['ID']>;
+  id_gte?: Maybe<Scalars['ID']>;
+  id_lte?: Maybe<Scalars['ID']>;
+  id_in?: Maybe<Array<Scalars['ID']>>;
+  id_not_in?: Maybe<Array<Scalars['ID']>>;
+  merkleDrop?: Maybe<Scalars['String']>;
+  merkleDrop_not?: Maybe<Scalars['String']>;
+  merkleDrop_gt?: Maybe<Scalars['String']>;
+  merkleDrop_lt?: Maybe<Scalars['String']>;
+  merkleDrop_gte?: Maybe<Scalars['String']>;
+  merkleDrop_lte?: Maybe<Scalars['String']>;
+  merkleDrop_in?: Maybe<Array<Scalars['String']>>;
+  merkleDrop_not_in?: Maybe<Array<Scalars['String']>>;
+  merkleDrop_contains?: Maybe<Scalars['String']>;
+  merkleDrop_not_contains?: Maybe<Scalars['String']>;
+  merkleDrop_starts_with?: Maybe<Scalars['String']>;
+  merkleDrop_not_starts_with?: Maybe<Scalars['String']>;
+  merkleDrop_ends_with?: Maybe<Scalars['String']>;
+  merkleDrop_not_ends_with?: Maybe<Scalars['String']>;
+  expired?: Maybe<Scalars['Boolean']>;
+  expired_not?: Maybe<Scalars['Boolean']>;
+  expired_in?: Maybe<Array<Scalars['Boolean']>>;
+  expired_not_in?: Maybe<Array<Scalars['Boolean']>>;
+  trancheNumber?: Maybe<Scalars['Int']>;
+  trancheNumber_not?: Maybe<Scalars['Int']>;
+  trancheNumber_gt?: Maybe<Scalars['Int']>;
+  trancheNumber_lt?: Maybe<Scalars['Int']>;
+  trancheNumber_gte?: Maybe<Scalars['Int']>;
+  trancheNumber_lte?: Maybe<Scalars['Int']>;
+  trancheNumber_in?: Maybe<Array<Scalars['Int']>>;
+  trancheNumber_not_in?: Maybe<Array<Scalars['Int']>>;
+  merkleRoot?: Maybe<Scalars['Bytes']>;
+  merkleRoot_not?: Maybe<Scalars['Bytes']>;
+  merkleRoot_in?: Maybe<Array<Scalars['Bytes']>>;
+  merkleRoot_not_in?: Maybe<Array<Scalars['Bytes']>>;
+  merkleRoot_contains?: Maybe<Scalars['Bytes']>;
+  merkleRoot_not_contains?: Maybe<Scalars['Bytes']>;
+  totalAmount?: Maybe<Scalars['BigInt']>;
+  totalAmount_not?: Maybe<Scalars['BigInt']>;
+  totalAmount_gt?: Maybe<Scalars['BigInt']>;
+  totalAmount_lt?: Maybe<Scalars['BigInt']>;
+  totalAmount_gte?: Maybe<Scalars['BigInt']>;
+  totalAmount_lte?: Maybe<Scalars['BigInt']>;
+  totalAmount_in?: Maybe<Array<Scalars['BigInt']>>;
+  totalAmount_not_in?: Maybe<Array<Scalars['BigInt']>>;
+};
+
+export enum MerkleDropTranche_OrderBy {
+  Id = 'id',
+  MerkleDrop = 'merkleDrop',
+  Expired = 'expired',
+  TrancheNumber = 'trancheNumber',
+  MerkleRoot = 'merkleRoot',
+  TotalAmount = 'totalAmount',
+  Claims = 'claims'
+}
+
 export enum OrderDirection {
   Asc = 'asc',
   Desc = 'desc'
@@ -789,6 +1001,12 @@ export type Query = {
   stakingRewardsContracts: Array<StakingRewardsContract>;
   stakingBalance?: Maybe<StakingBalance>;
   stakingBalances: Array<StakingBalance>;
+  merkleDropClaim?: Maybe<MerkleDropClaim>;
+  merkleDropClaims: Array<MerkleDropClaim>;
+  merkleDropTranche?: Maybe<MerkleDropTranche>;
+  merkleDropTranches: Array<MerkleDropTranche>;
+  merkleDrop?: Maybe<MerkleDrop>;
+  merkleDrops: Array<MerkleDrop>;
   timeMetric?: Maybe<TimeMetric>;
   timeMetrics: Array<TimeMetric>;
   transaction?: Maybe<Transaction>;
@@ -1128,6 +1346,54 @@ export type QueryStakingBalancesArgs = {
   orderBy?: Maybe<StakingBalance_OrderBy>;
   orderDirection?: Maybe<OrderDirection>;
   where?: Maybe<StakingBalance_Filter>;
+  block?: Maybe<Block_Height>;
+};
+
+
+export type QueryMerkleDropClaimArgs = {
+  id: Scalars['ID'];
+  block?: Maybe<Block_Height>;
+};
+
+
+export type QueryMerkleDropClaimsArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<MerkleDropClaim_OrderBy>;
+  orderDirection?: Maybe<OrderDirection>;
+  where?: Maybe<MerkleDropClaim_Filter>;
+  block?: Maybe<Block_Height>;
+};
+
+
+export type QueryMerkleDropTrancheArgs = {
+  id: Scalars['ID'];
+  block?: Maybe<Block_Height>;
+};
+
+
+export type QueryMerkleDropTranchesArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<MerkleDropTranche_OrderBy>;
+  orderDirection?: Maybe<OrderDirection>;
+  where?: Maybe<MerkleDropTranche_Filter>;
+  block?: Maybe<Block_Height>;
+};
+
+
+export type QueryMerkleDropArgs = {
+  id: Scalars['ID'];
+  block?: Maybe<Block_Height>;
+};
+
+
+export type QueryMerkleDropsArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<MerkleDrop_OrderBy>;
+  orderDirection?: Maybe<OrderDirection>;
+  where?: Maybe<MerkleDrop_Filter>;
   block?: Maybe<Block_Height>;
 };
 
@@ -2017,6 +2283,12 @@ export type Subscription = {
   stakingRewardsContracts: Array<StakingRewardsContract>;
   stakingBalance?: Maybe<StakingBalance>;
   stakingBalances: Array<StakingBalance>;
+  merkleDropClaim?: Maybe<MerkleDropClaim>;
+  merkleDropClaims: Array<MerkleDropClaim>;
+  merkleDropTranche?: Maybe<MerkleDropTranche>;
+  merkleDropTranches: Array<MerkleDropTranche>;
+  merkleDrop?: Maybe<MerkleDrop>;
+  merkleDrops: Array<MerkleDrop>;
   timeMetric?: Maybe<TimeMetric>;
   timeMetrics: Array<TimeMetric>;
   transaction?: Maybe<Transaction>;
@@ -2356,6 +2628,54 @@ export type SubscriptionStakingBalancesArgs = {
   orderBy?: Maybe<StakingBalance_OrderBy>;
   orderDirection?: Maybe<OrderDirection>;
   where?: Maybe<StakingBalance_Filter>;
+  block?: Maybe<Block_Height>;
+};
+
+
+export type SubscriptionMerkleDropClaimArgs = {
+  id: Scalars['ID'];
+  block?: Maybe<Block_Height>;
+};
+
+
+export type SubscriptionMerkleDropClaimsArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<MerkleDropClaim_OrderBy>;
+  orderDirection?: Maybe<OrderDirection>;
+  where?: Maybe<MerkleDropClaim_Filter>;
+  block?: Maybe<Block_Height>;
+};
+
+
+export type SubscriptionMerkleDropTrancheArgs = {
+  id: Scalars['ID'];
+  block?: Maybe<Block_Height>;
+};
+
+
+export type SubscriptionMerkleDropTranchesArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<MerkleDropTranche_OrderBy>;
+  orderDirection?: Maybe<OrderDirection>;
+  where?: Maybe<MerkleDropTranche_Filter>;
+  block?: Maybe<Block_Height>;
+};
+
+
+export type SubscriptionMerkleDropArgs = {
+  id: Scalars['ID'];
+  block?: Maybe<Block_Height>;
+};
+
+
+export type SubscriptionMerkleDropsArgs = {
+  skip?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  orderBy?: Maybe<MerkleDrop_OrderBy>;
+  orderDirection?: Maybe<OrderDirection>;
+  where?: Maybe<MerkleDrop_Filter>;
   block?: Maybe<Block_Height>;
 };
 
@@ -2962,6 +3282,19 @@ export type RewardsDistributorQueryVariables = {};
 
 
 export type RewardsDistributorQuery = { rewardsDistributors: Array<Pick<RewardsDistributor, 'id' | 'fundManagers'>> };
+
+export type MerkleDropClaimsQueryVariables = {
+  account: Scalars['Bytes'];
+};
+
+
+export type MerkleDropClaimsQuery = { merkleDrops: Array<(
+    Pick<MerkleDrop, 'id'>
+    & { token: TokenDetailsFragment, tranches: Array<(
+      Pick<MerkleDropTranche, 'trancheNumber' | 'totalAmount'>
+      & { claims: Array<Pick<MerkleDropClaim, 'balance'>> }
+    )> }
+  )> };
 
 export const TokenDetailsFragmentDoc = gql`
     fragment TokenDetails on Token {
@@ -3677,3 +4010,46 @@ export function useRewardsDistributorLazyQuery(baseOptions?: ApolloReactHooks.La
 export type RewardsDistributorQueryHookResult = ReturnType<typeof useRewardsDistributorQuery>;
 export type RewardsDistributorLazyQueryHookResult = ReturnType<typeof useRewardsDistributorLazyQuery>;
 export type RewardsDistributorQueryResult = ApolloReactCommon.QueryResult<RewardsDistributorQuery, RewardsDistributorQueryVariables>;
+export const MerkleDropClaimsDocument = gql`
+    query MerkleDropClaims($account: Bytes!) @api(name: mstable) {
+  merkleDrops {
+    id
+    token {
+      ...TokenDetails
+    }
+    tranches(orderDirection: asc, orderBy: trancheNumber, where: {expired: false}) {
+      trancheNumber
+      totalAmount
+      claims(where: {account: $account}) {
+        balance
+      }
+    }
+  }
+}
+    ${TokenDetailsFragmentDoc}`;
+
+/**
+ * __useMerkleDropClaimsQuery__
+ *
+ * To run a query within a React component, call `useMerkleDropClaimsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMerkleDropClaimsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMerkleDropClaimsQuery({
+ *   variables: {
+ *      account: // value for 'account'
+ *   },
+ * });
+ */
+export function useMerkleDropClaimsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<MerkleDropClaimsQuery, MerkleDropClaimsQueryVariables>) {
+        return ApolloReactHooks.useQuery<MerkleDropClaimsQuery, MerkleDropClaimsQueryVariables>(MerkleDropClaimsDocument, baseOptions);
+      }
+export function useMerkleDropClaimsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MerkleDropClaimsQuery, MerkleDropClaimsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<MerkleDropClaimsQuery, MerkleDropClaimsQueryVariables>(MerkleDropClaimsDocument, baseOptions);
+        }
+export type MerkleDropClaimsQueryHookResult = ReturnType<typeof useMerkleDropClaimsQuery>;
+export type MerkleDropClaimsLazyQueryHookResult = ReturnType<typeof useMerkleDropClaimsLazyQuery>;
+export type MerkleDropClaimsQueryResult = ApolloReactCommon.QueryResult<MerkleDropClaimsQuery, MerkleDropClaimsQueryVariables>;
