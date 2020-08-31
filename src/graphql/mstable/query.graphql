@@ -1,20 +1,5 @@
 # import './fragments.graphql'
 
-query CoreTokens @api(name: mstable) {
-  mUSD: tokens(where: { symbol: "mUSD" }) {
-    ...TokenDetails
-  }
-  #    mta: tokens(where: { symbol: "MTA" }) {
-  #        ...TokenDetails
-  #    }
-  #    mGLD: tokens(where: { symbol: "mGLD" }) {
-  #        ...TokenDetails
-  #    }
-  mUSDSavings: savingsContracts(first: 1) {
-    id
-  }
-}
-
 query Masset($id: ID!) @api(name: mstable) {
   masset(id: $id) {
     ...MassetAll
@@ -28,26 +13,8 @@ query Erc20Tokens($addresses: [Bytes!]!) @api(name: mstable) {
 }
 
 query AllErc20Tokens @api(name: mstable) {
-  savingsContracts {
-    address: id
-    id
-  }
   tokens {
     ...TokenDetails
-  }
-}
-
-query TokenByAddress($id: ID!) @api(name: mstable) {
-  token(id: $id) {
-    id
-    address
-    decimals
-    name
-    symbol
-    totalBurned
-    totalBurned
-    totalSupply
-    totalTransferred
   }
 }
 
@@ -144,12 +111,6 @@ query SavingsContract($id: ID!) @api(name: mstable) {
     }
     savingsRate
     automationEnabled
-  }
-}
-
-query Token($id: ID!) @api(name: mstable) {
-  token(id: $id) {
-    ...TokenDetails
   }
 }
 

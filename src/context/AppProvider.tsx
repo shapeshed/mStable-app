@@ -42,7 +42,6 @@ enum Actions {
   ConnectWalletError,
   ConnectWalletSuccess,
   SetWalletSubType,
-  SelectMasset,
   SupportedChainSelected,
   SetOnline,
   SetAccountItem,
@@ -79,11 +78,9 @@ interface State {
   };
   accountItem: AccountItems | null;
   online: boolean;
-  selectedMasset: string;
 }
 
 type Action =
-  | { type: Actions.SelectMasset; payload: string }
   | { type: Actions.SetAccountItem; payload: AccountItems | null }
   | { type: Actions.ToggleAccount; payload: AccountItems }
   | { type: Actions.ResetWallet }
@@ -105,7 +102,6 @@ interface Dispatch {
   connectWallet(connector: keyof Connectors, subType?: string): void;
   openWalletRedirect(redirect: string): void;
   resetWallet(): void;
-  selectMasset(massetName: string): void;
   toggleNotifications(): void;
   toggleWallet(): void;
 }
@@ -132,8 +128,6 @@ const reducer: Reducer<State, Action> = (state, action) => {
           error: null,
         },
       };
-    case Actions.SelectMasset:
-      return { ...state, selectedMasset: action.payload };
     case Actions.ResetWallet:
       return {
         ...state,
@@ -200,7 +194,6 @@ const initialState: State = {
     supportedChain: true,
   },
   accountItem: null,
-  selectedMasset: 'mUSD',
   online: true,
 };
 
@@ -252,13 +245,6 @@ export const AppProvider: FC<{}> = ({ children }) => {
     path => {
       navigate(path);
       dispatch({ type: Actions.SetAccountItem, payload: AccountItems.Wallet });
-    },
-    [dispatch],
-  );
-
-  const selectMasset = useCallback<Dispatch['selectMasset']>(
-    massetName => {
-      dispatch({ type: Actions.SelectMasset, payload: massetName });
     },
     [dispatch],
   );
@@ -470,7 +456,6 @@ export const AppProvider: FC<{}> = ({ children }) => {
             connectWallet,
             openWalletRedirect,
             resetWallet,
-            selectMasset,
             toggleNotifications,
             toggleWallet,
           },
@@ -481,7 +466,6 @@ export const AppProvider: FC<{}> = ({ children }) => {
           connectWallet,
           openWalletRedirect,
           resetWallet,
-          selectMasset,
           toggleNotifications,
           toggleWallet,
         ],

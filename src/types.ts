@@ -12,6 +12,20 @@ import { IRewardsVault } from './typechain/IRewardsVault.d';
 import { RewardsDistributor as IRewardsDistributor } from './typechain/RewardsDistributor.d';
 import { MerkleDrop as IMerkleDrop } from './typechain/MerkleDrop.d';
 
+export interface Masset {
+  address: string;
+  name: MassetNames;
+  selected?: boolean;
+  savingsContract?: {
+    address: string;
+  };
+}
+
+export enum MassetNames {
+  mUSD = 'mUSD',
+  mBTC = 'mBTC',
+}
+
 export interface Transaction {
   formId?: string;
   hash: string;

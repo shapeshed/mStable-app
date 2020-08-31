@@ -1,4 +1,5 @@
 import React, { createContext, useContext, FC, useMemo } from 'react';
+
 import { useSignerContext } from '../SignerProvider';
 import { Erc20Detailed } from '../../typechain/Erc20Detailed.d';
 import { Erc20DetailedFactory } from '../../typechain/Erc20DetailedFactory';
@@ -6,33 +7,44 @@ import { Masset } from '../../typechain/Masset.d';
 import { MassetFactory } from '../../typechain/MassetFactory';
 import { SavingsContract } from '../../typechain/SavingsContract.d';
 import { SavingsContractFactory } from '../../typechain/SavingsContractFactory';
+import { useMassets, useSelectedMasset } from '../MassetsProvider';
+import { MassetNames } from '../../types';
 
 interface State {
-  mUSD: Masset | null;
-  mUSDSavings: SavingsContract | null;
+  massets: Record<
+    MassetNames,
+    { contract?: Masset; savingsContract?: SavingsContract }
+  >;
 }
 
 const context = createContext<State>({} as State);
 
 export const ContractsProvider: FC<{}> = ({ children }) => {
   const signer = useSignerContext();
+  const massets = useMassets();
 
   const state = useMemo<State>(
     () => ({
-      mUSD: signer
-        ? MassetFactory.connect(
-            process.env.REACT_APP_MUSD_ADDRESS as string,
-            signer,
-          )
-        : null,
-      mUSDSavings: signer
-        ? SavingsContractFactory.connect(
-            process.env.REACT_APP_MUSD_SAVINGS_ADDRESS as string,
-            signer,
-          )
-        : null,
+      massets: Object.fromEntries(
+        massets.map(({ name, address, savingsContract }) => {
+          const value = signer
+            ? {
+                contract: MassetFactory.connect(address, signer),
+                ...(savingsContract?.address
+                  ? {
+                      savingsContract: SavingsContractFactory.connect(
+                        savingsContract.address,
+                        signer,
+                      ),
+                    }
+                  : {}),
+              }
+            : {};
+          return [name, value];
+        }),
+      ) as State['massets'],
     }),
-    [signer],
+    [massets, signer],
   );
 
   return <context.Provider value={state}>{children}</context.Provider>;
@@ -40,10 +52,19 @@ export const ContractsProvider: FC<{}> = ({ children }) => {
 
 export const useContractsState = (): State => useContext(context);
 
-export const useMusdContract = (): State['mUSD'] => useContractsState().mUSD;
+export const useSelectedMassetContract = (): Masset | undefined => {
+  const { massets } = useContractsState();
+  const selectedMasset = useSelectedMasset();
+  return massets[selectedMasset.name]?.contract;
+};
 
-export const useSavingsContract = (): State['mUSDSavings'] =>
-  useContractsState().mUSDSavings;
+export const useSelectedMassetSavingsContract = ():
+  | SavingsContract
+  | undefined => {
+  const { massets } = useContractsState();
+  const selectedMasset = useSelectedMasset();
+  return massets[selectedMasset.name]?.savingsContract;
+};
 
 export const useErc20Contract = (
   address: string | null,
